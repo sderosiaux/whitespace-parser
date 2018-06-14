@@ -3,7 +3,7 @@ package com.sderosiaux.whitespace.commands
 import cats.{MonadError, SemigroupK}
 import cats.data.StateT
 import com.sderosiaux.parser.Parser
-import com.sderosiaux.whitespace.Stack
+import com.sderosiaux.whitespace.{Stack, WhitespaceParser}
 import cats.implicits._
 
 class ArithmeticCommands[F[_]: MonadError[?[_], Unit]: SemigroupK] extends Commands[F] {
@@ -15,7 +15,7 @@ class ArithmeticCommands[F[_]: MonadError[?[_], Unit]: SemigroupK] extends Comma
     case _ => stack // TODO(sd): errors are not handled
   }
 
-  def addition: StateT[F, (String, Stack), String] = for {
+  def addition: WhitespaceParser[F] = for {
     _ <- Parser.spacy[F] *> Parser.spacy[F]
     _ <- StateT.modify[F, (String, Stack)](s => (s._1, replaceWithSum(s._2)))
   } yield ""

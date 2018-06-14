@@ -5,7 +5,7 @@ import cats.{MonadError, SemigroupK}
 import com.sderosiaux.whitespace.commands._
 import cats.implicits._
 
-class WhitespaceParser[F[_]: MonadError[?[_], Unit]: SemigroupK] {
+class WhitespaceInterpreter[F[_]: MonadError[?[_], Unit]: SemigroupK] {
 
   val stackCommands = new StackManipulationCommands[F]
   val ioCommands = new IOCommands[F]
@@ -13,7 +13,7 @@ class WhitespaceParser[F[_]: MonadError[?[_], Unit]: SemigroupK] {
   val heapCommands = new HeapCommands[F]
   val flowCommands = new FlowCommands[F]
 
-  def imp: StateT[F, (String, Stack), String] = for {
+  def imp: WhitespaceParser[F] = for {
     output <- stackCommands.all <+>
       ioCommands.all <+>
       arithmeticCommands.all <+>
@@ -28,7 +28,7 @@ class WhitespaceParser[F[_]: MonadError[?[_], Unit]: SemigroupK] {
 
 object WhitespaceParserApp extends App {
   val helloWorld = "   \t  \t   \n\t\n     \t\t  \t \t\n\t\n     \t\t \t\t  \n\t\n     \t\t \t\t  \n\t\n     \t\t \t\t\t\t\n\t\n     \t \t\t  \n\t\n     \t     \n\t\n     \t\t\t \t\t\t\n\t\n     \t\t \t\t\t\t\n\t\n     \t\t\t  \t \n\t\n     \t\t \t\t  \n\t\n     \t\t  \t  \n\t\n     \t    \t\n\t\n  \n\n\n"
-  val Some(((rest, stack), output)) = new WhitespaceParser[Option].eval(helloWorld)
+  val Some(((rest, stack), output)) = new WhitespaceInterpreter[Option].eval(helloWorld)
   println(s"Stack: $stack")
   println(s"Output: $output")
 }
