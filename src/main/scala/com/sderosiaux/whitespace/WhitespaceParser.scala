@@ -1,13 +1,9 @@
 package com.sderosiaux.whitespace
 
 import cats.data.StateT
-import cats.effect.IO
-import cats.{Eval, MonadError, SemigroupK}
-import com.sderosiaux.parser.Parser
+import cats.{MonadError, SemigroupK}
 import com.sderosiaux.whitespace.commands._
 import cats.implicits._
-
-import scala.util.Try
 
 class WhitespaceParser[F[_]: MonadError[?[_], Unit]: SemigroupK] {
 

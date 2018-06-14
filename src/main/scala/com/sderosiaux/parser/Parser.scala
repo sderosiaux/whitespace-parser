@@ -1,10 +1,9 @@
 package com.sderosiaux.parser
 
-import cats.{Applicative, ApplicativeError, MonadError, SemigroupK}
+import cats.{MonadError, SemigroupK}
 import cats.data.StateT
 import com.sderosiaux.whitespace.Stack
 import cats.implicits._
-import cats.effect.implicits._
 
 object Parser {
 

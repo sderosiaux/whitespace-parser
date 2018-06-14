@@ -12,6 +12,7 @@ class ArithmeticCommands[F[_]: MonadError[?[_], Unit]: SemigroupK] extends Comma
 
   private def replaceWithSum(stack: Stack) = stack match {
     case a :: b :: rest => (a + b) +: rest
+    case _ => stack // TODO(sd): errors are not handled
   }
 
   def addition: StateT[F, (String, Stack), String] = for {

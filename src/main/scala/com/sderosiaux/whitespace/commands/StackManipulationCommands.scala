@@ -28,6 +28,7 @@ class StackManipulationCommands[F[_]: MonadError[?[_], Unit]: SemigroupK] extend
     _ <- Parser.lf[F] *> Parser.tab[F]
     _ <- StateT.modify[F, (String, Stack)]{ case (program, stack) => (program, stack match {
       case head :: head2 :: rest => head2 +: head +: rest
+      case _ => stack // TODO(sd): errors are not handled
     }) }
   } yield ""
 

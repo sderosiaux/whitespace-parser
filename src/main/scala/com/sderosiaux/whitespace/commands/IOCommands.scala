@@ -11,12 +11,14 @@ class IOCommands[F[_]: MonadError[?[_], Unit]: SemigroupK] extends Commands[F] {
   override def commands = printChar <+> printNumber
 
   def printChar: StateT[F, (String, Stack), String] = for {
-    x <- StateT.get[F, (String, Stack)]
+    s <- StateT.get[F, (String, Stack)]
+    (_, stack) = s
     _ <- Parser.spacy[F] *> Parser.spacy[F]
-  } yield x._2.head.toChar.toString
+  } yield stack.head.toChar.toString
 
   def printNumber: StateT[F, (String, Stack), String] = for {
-    x <- StateT.get[F, (String, Stack)]
+    s <- StateT.get[F, (String, Stack)]
+    (_, stack) = s
     _ <- Parser.spacy[F] *> Parser.tab[F]
-  } yield x._2.head.toString
+  } yield stack.head.toString
 }
