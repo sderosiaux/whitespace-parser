@@ -1,4 +1,4 @@
-# Whitespace parser
+# Whitespace parser [![Build Status](https://travis-ci.org/sderosiaux/whitespace-parser.svg?branch=master)](https://travis-ci.org/sderosiaux/whitespace-parser)
 
 Example of a parser implementation of the Whitespace programming language using only `StateT` to convey the state, the stack and the output of the program.
 
@@ -42,3 +42,7 @@ Output: Hello, world!
 ## Syntax
 
 Details about the syntax here: https://hackage.haskell.org/package/whitespace-0.4/src/docs/tutorial.html
+
+## Notes
+
+The parser is not complete, some commands are missing, but you get the idea.
