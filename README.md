@@ -2,7 +2,7 @@
 
 Example of a parser implementation of the Whitespace programming language using only `StateT` to convey the state, the stack and the output of the program.
 
-Whitespace deals with 3 characters only: `" "`, ``"\t"`, and ``"\n"`.
+Whitespace deals with 3 characters only: `" "`, ``"\t"`, and `"\n"`.
 
 This parser relies massively upon `StateT` and misc combinators, as we can see in the root parser:
 
@@ -21,8 +21,7 @@ The state of our parser contains the program and the stack of execution. The res
 
 Whitespace has 5 big chunks of commands to determine how to interpret the following characters.
 
-For instance, "\t\n  " means _print the character on top of the stack_.
-
+For instance, one of the `ioCommands` (triggered by `"\t\n"`) is `"  "` which means: _print the character on top of the stack_.
 
 ## Hello, world!
 
