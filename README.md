@@ -1,5 +1,7 @@
 # Whitespace parser [![Build Status](https://travis-ci.org/sderosiaux/whitespace-parser.svg?branch=master)](https://travis-ci.org/sderosiaux/whitespace-parser)
 
+Associated blog post: https://www.sderosiaux.com/2018/06/15/a-simple-way-to-write-parsers-using-the-state-monad/
+
 Example of a parser implementation of the Whitespace programming language using only `StateT` to convey the state, the stack and the output of the program.
 
 Whitespace deals with 3 characters only: `" "`, `"\t"`, and `"\n"`.
